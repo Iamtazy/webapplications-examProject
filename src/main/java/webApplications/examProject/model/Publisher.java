@@ -1,11 +1,17 @@
 package webApplications.examProject.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
 import org.hibernate.validator.constraints.NotEmpty;
 
+@Entity
 public class Publisher {
 	
-	//GENERATED, TODO
-	
+	@Id
+	@Column(name="registrationNumber", nullable = false)
 	@NotEmpty
 	private int registrationNumber;
 	@NotEmpty
@@ -13,18 +19,22 @@ public class Publisher {
 	private String countryOfHQ;
 	private String cityOfHQ;
 	private double income;
+	@OneToOne(mappedBy="publisher")
+	private Band publishedBand;
 	
 	public Publisher(){
 		
 	}
 
-	public Publisher(int registrationNumber, String name, String countryOfHQ, String cityOfHQ, double income) {
+	public Publisher(int registrationNumber, String name, String countryOfHQ, String cityOfHQ, double income,
+			Band publishedBand) {
 		super();
 		this.registrationNumber = registrationNumber;
 		this.name = name;
 		this.countryOfHQ = countryOfHQ;
 		this.cityOfHQ = cityOfHQ;
 		this.income = income;
+		this.publishedBand = publishedBand;
 	}
 
 	public int getRegistrationNumber() {
@@ -67,6 +77,14 @@ public class Publisher {
 		this.income = income;
 	}
 
+	public Band getPublishedBand() {
+		return publishedBand;
+	}
+
+	public void setPublishedBand(Band publishedBand) {
+		this.publishedBand = publishedBand;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -77,6 +95,7 @@ public class Publisher {
 		temp = Double.doubleToLongBits(income);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((publishedBand == null) ? 0 : publishedBand.hashCode());
 		result = prime * result + registrationNumber;
 		return result;
 	}
@@ -107,6 +126,11 @@ public class Publisher {
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
+		if (publishedBand == null) {
+			if (other.publishedBand != null)
+				return false;
+		} else if (!publishedBand.equals(other.publishedBand))
+			return false;
 		if (registrationNumber != other.registrationNumber)
 			return false;
 		return true;
@@ -115,7 +139,9 @@ public class Publisher {
 	@Override
 	public String toString() {
 		return "Publisher [registrationNumber=" + registrationNumber + ", name=" + name + ", countryOfHQ=" + countryOfHQ
-				+ ", cityOfHQ=" + cityOfHQ + ", income=" + income + "]";
+				+ ", cityOfHQ=" + cityOfHQ + ", income=" + income + ", publishedBand=" + publishedBand + "]";
 	}
+	
+	
 
 }

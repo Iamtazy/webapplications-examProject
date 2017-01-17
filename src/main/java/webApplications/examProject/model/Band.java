@@ -2,33 +2,54 @@ package webApplications.examProject.model;
 
 import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
 import org.hibernate.validator.constraints.NotEmpty;
 
+@Entity
 public class Band {
 	
-	//GENERATED, TODO
-	
+	@Id
+	@Column(name="name", nullable = false)
 	@NotEmpty
 	private String name;
-	private List<String> genres;
+	@NotEmpty
+	private String genre;
+	@NotEmpty
 	private String countryOfOrigin;
+	@NotEmpty
 	private String cityOfOrigin;
+	@NotEmpty
 	private int numberOfAlbums;
+	@NotEmpty
 	private int numberOfMembers;
+	@OneToMany(mappedBy="bandName")
+	private List<Album> albums;
+	@OneToMany(mappedBy="band")
+	private List<Member> members;
+	@OneToOne
+	private Publisher publisher;
 	
 	public Band() {
 		
 	}
 
-	public Band(String name, List<String> genres, String countryOfOrigin, String cityOfOrigin, int numberOfAlbums,
-			int numberOfMembers) {
+	public Band(String name, String genre, String countryOfOrigin, String cityOfOrigin, int numberOfAlbums,
+			int numberOfMembers, List<Album> albums, List<Member> members, Publisher publisher) {
 		super();
 		this.name = name;
-		this.genres = genres;
+		this.genre = genre;
 		this.countryOfOrigin = countryOfOrigin;
 		this.cityOfOrigin = cityOfOrigin;
 		this.numberOfAlbums = numberOfAlbums;
 		this.numberOfMembers = numberOfMembers;
+		this.albums = albums;
+		this.members = members;
+		this.publisher = publisher;
 	}
 
 	public String getName() {
@@ -37,14 +58,6 @@ public class Band {
 
 	public void setName(String name) {
 		this.name = name;
-	}
-
-	public List<String> getGenres() {
-		return genres;
-	}
-
-	public void setGenres(List<String> genres) {
-		this.genres = genres;
 	}
 
 	public String getCountryOfOrigin() {
@@ -79,16 +92,43 @@ public class Band {
 		this.numberOfMembers = numberOfMembers;
 	}
 
+	public List<Album> getAlbums() {
+		return albums;
+	}
+
+	public void setAlbums(List<Album> albums) {
+		this.albums = albums;
+	}
+
+	public List<Member> getMembers() {
+		return members;
+	}
+
+	public void setMembers(List<Member> members) {
+		this.members = members;
+	}
+
+	public Publisher getPublisher() {
+		return publisher;
+	}
+
+	public void setPublisher(Publisher publisher) {
+		this.publisher = publisher;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
+		result = prime * result + ((albums == null) ? 0 : albums.hashCode());
 		result = prime * result + ((cityOfOrigin == null) ? 0 : cityOfOrigin.hashCode());
 		result = prime * result + ((countryOfOrigin == null) ? 0 : countryOfOrigin.hashCode());
-		result = prime * result + ((genres == null) ? 0 : genres.hashCode());
+		result = prime * result + ((genre == null) ? 0 : genre.hashCode());
+		result = prime * result + ((members == null) ? 0 : members.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		result = prime * result + numberOfAlbums;
 		result = prime * result + numberOfMembers;
+		result = prime * result + ((publisher == null) ? 0 : publisher.hashCode());
 		return result;
 	}
 
@@ -101,6 +141,11 @@ public class Band {
 		if (getClass() != obj.getClass())
 			return false;
 		Band other = (Band) obj;
+		if (albums == null) {
+			if (other.albums != null)
+				return false;
+		} else if (!albums.equals(other.albums))
+			return false;
 		if (cityOfOrigin == null) {
 			if (other.cityOfOrigin != null)
 				return false;
@@ -111,10 +156,15 @@ public class Band {
 				return false;
 		} else if (!countryOfOrigin.equals(other.countryOfOrigin))
 			return false;
-		if (genres == null) {
-			if (other.genres != null)
+		if (genre == null) {
+			if (other.genre != null)
 				return false;
-		} else if (!genres.equals(other.genres))
+		} else if (!genre.equals(other.genre))
+			return false;
+		if (members == null) {
+			if (other.members != null)
+				return false;
+		} else if (!members.equals(other.members))
 			return false;
 		if (name == null) {
 			if (other.name != null)
@@ -125,16 +175,28 @@ public class Band {
 			return false;
 		if (numberOfMembers != other.numberOfMembers)
 			return false;
+		if (publisher == null) {
+			if (other.publisher != null)
+				return false;
+		} else if (!publisher.equals(other.publisher))
+			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Zenekar [name=" + name + ", genres=" + genres + ", countryOfOrigin=" + countryOfOrigin
-				+ ", cityOfOrigin=" + cityOfOrigin + ", numberOfAlbums=" + numberOfAlbums + ", numberOfMembers="
-				+ numberOfMembers + "]";
+		return "Band [name=" + name + ", genres=" + genre + ", countryOfOrigin=" + countryOfOrigin + ", cityOfOrigin="
+				+ cityOfOrigin + ", numberOfAlbums=" + numberOfAlbums + ", numberOfMembers=" + numberOfMembers
+				+ ", albums=" + albums + ", members=" + members + ", publisher=" + publisher + "]";
 	}
-	
-	
 
+	public String getGenre() {
+		return genre;
+	}
+
+	public void setGenre(String genre) {
+		this.genre = genre;
+	}
+
+	
 }
