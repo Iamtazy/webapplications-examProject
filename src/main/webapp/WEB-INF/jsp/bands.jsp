@@ -9,7 +9,8 @@
 </head>
 <body>
 <c:forEach var="band" items="${bands}">
-	<p>${band}<br>
+	<p>${band}<br></p>
 </c:forEach>
+asdasd
 </body>
 </html>

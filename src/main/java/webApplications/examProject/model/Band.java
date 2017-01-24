@@ -4,9 +4,11 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -14,42 +16,42 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class Band {
 	
 	@Id
-	@Column(name="name", nullable = false)
+	@Column(name="band_id", nullable = false)
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@NotNull
+	private int bandID;
 	@NotEmpty
 	private String name;
 	@NotEmpty
 	private String genre;
 	@NotEmpty
 	private String countryOfOrigin;
-	@NotEmpty
-	private String cityOfOrigin;
-	@NotEmpty
-	private int numberOfAlbums;
-	@NotEmpty
-	private int numberOfMembers;
-	@OneToMany(mappedBy="bandName")
+	@OneToMany(mappedBy="band")
 	private List<Album> albums;
 	@OneToMany(mappedBy="band")
 	private List<Member> members;
-	@OneToOne
-	private Publisher publisher;
 	
-	public Band() {
+	protected Band() {
 		
 	}
 
-	public Band(String name, String genre, String countryOfOrigin, String cityOfOrigin, int numberOfAlbums,
-			int numberOfMembers, List<Album> albums, List<Member> members, Publisher publisher) {
+	public Band(int bandID, String name, String genre, String countryOfOrigin, List<Album> albums,
+			List<Member> members) {
 		super();
+		this.bandID = bandID;
 		this.name = name;
 		this.genre = genre;
 		this.countryOfOrigin = countryOfOrigin;
-		this.cityOfOrigin = cityOfOrigin;
-		this.numberOfAlbums = numberOfAlbums;
-		this.numberOfMembers = numberOfMembers;
 		this.albums = albums;
 		this.members = members;
-		this.publisher = publisher;
+	}
+
+	public int getBandID() {
+		return bandID;
+	}
+
+	public void setBandID(int bandID) {
+		this.bandID = bandID;
 	}
 
 	public String getName() {
@@ -60,36 +62,20 @@ public class Band {
 		this.name = name;
 	}
 
+	public String getGenre() {
+		return genre;
+	}
+
+	public void setGenre(String genre) {
+		this.genre = genre;
+	}
+
 	public String getCountryOfOrigin() {
 		return countryOfOrigin;
 	}
 
 	public void setCountryOfOrigin(String countryOfOrigin) {
 		this.countryOfOrigin = countryOfOrigin;
-	}
-
-	public String getCityOfOrigin() {
-		return cityOfOrigin;
-	}
-
-	public void setCityOfOrigin(String cityOfOrigin) {
-		this.cityOfOrigin = cityOfOrigin;
-	}
-
-	public int getNumberOfAlbums() {
-		return numberOfAlbums;
-	}
-
-	public void setNumberOfAlbums(int numberOfAlbums) {
-		this.numberOfAlbums = numberOfAlbums;
-	}
-
-	public int getNumberOfMembers() {
-		return numberOfMembers;
-	}
-
-	public void setNumberOfMembers(int numberOfMembers) {
-		this.numberOfMembers = numberOfMembers;
 	}
 
 	public List<Album> getAlbums() {
@@ -108,27 +94,16 @@ public class Band {
 		this.members = members;
 	}
 
-	public Publisher getPublisher() {
-		return publisher;
-	}
-
-	public void setPublisher(Publisher publisher) {
-		this.publisher = publisher;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((albums == null) ? 0 : albums.hashCode());
-		result = prime * result + ((cityOfOrigin == null) ? 0 : cityOfOrigin.hashCode());
+		result = prime * result + bandID;
 		result = prime * result + ((countryOfOrigin == null) ? 0 : countryOfOrigin.hashCode());
 		result = prime * result + ((genre == null) ? 0 : genre.hashCode());
 		result = prime * result + ((members == null) ? 0 : members.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
-		result = prime * result + numberOfAlbums;
-		result = prime * result + numberOfMembers;
-		result = prime * result + ((publisher == null) ? 0 : publisher.hashCode());
 		return result;
 	}
 
@@ -146,10 +121,7 @@ public class Band {
 				return false;
 		} else if (!albums.equals(other.albums))
 			return false;
-		if (cityOfOrigin == null) {
-			if (other.cityOfOrigin != null)
-				return false;
-		} else if (!cityOfOrigin.equals(other.cityOfOrigin))
+		if (bandID != other.bandID)
 			return false;
 		if (countryOfOrigin == null) {
 			if (other.countryOfOrigin != null)
@@ -171,31 +143,13 @@ public class Band {
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
-		if (numberOfAlbums != other.numberOfAlbums)
-			return false;
-		if (numberOfMembers != other.numberOfMembers)
-			return false;
-		if (publisher == null) {
-			if (other.publisher != null)
-				return false;
-		} else if (!publisher.equals(other.publisher))
-			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Band [name=" + name + ", genres=" + genre + ", countryOfOrigin=" + countryOfOrigin + ", cityOfOrigin="
-				+ cityOfOrigin + ", numberOfAlbums=" + numberOfAlbums + ", numberOfMembers=" + numberOfMembers
-				+ ", albums=" + albums + ", members=" + members + ", publisher=" + publisher + "]";
-	}
-
-	public String getGenre() {
-		return genre;
-	}
-
-	public void setGenre(String genre) {
-		this.genre = genre;
+		return "Band [bandID=" + bandID + ", name=" + name + ", genre=" + genre + ", countryOfOrigin=" + countryOfOrigin
+				+ ", albums=" + albums + ", members=" + members + "]";
 	}
 
 	

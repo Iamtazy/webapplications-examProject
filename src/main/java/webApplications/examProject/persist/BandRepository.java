@@ -1,11 +1,11 @@
 package webApplications.examProject.persist;
 
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
 import webApplications.examProject.model.Band;
 
-public interface BandRepository extends CrudRepository<Band, String> {
-	
-	
+@Repository
+public interface BandRepository extends CrudRepository<Band, Integer> {
 
 }

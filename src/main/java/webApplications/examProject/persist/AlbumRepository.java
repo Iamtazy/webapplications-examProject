@@ -1,9 +1,11 @@
 package webApplications.examProject.persist;
 
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
 import webApplications.examProject.model.Album;
 
-public interface AlbumRepository extends CrudRepository<Album, String> {
+@Repository
+public interface AlbumRepository extends CrudRepository<Album, Integer> {
 
 }

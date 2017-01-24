@@ -8,6 +8,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
@@ -16,34 +17,39 @@ import org.hibernate.validator.constraints.NotEmpty;
 public class Album {
 	
 	@Id
-	@Column(name="title", nullable = false)
+	@Column(name="album_id", nullable = false)
+	@NotNull
+	private int albumID;
 	@NotEmpty
 	private String title;
-	@NotEmpty
+	@NotNull
 	private int numberOfSales;
-	@NotEmpty
+	@NotNull
 	@Min(value = 1975)
 	private int yearOfRelease;
-	@Min(value = 1)
-	@Max(value = 25)
-	@NotEmpty
-	private double lengthInMinutes;
 	@ManyToOne
-	@JoinColumn(name="bandName")
-	@NotEmpty
-	private Band bandName;
+	@JoinColumn(name="band_id")
+	private Band band;
 	
 	protected Album() {
 		
 	}
 
-	public Album(String title, int numberOfSales, int yearOfRelease, double lengthInMinutes, Band bandName) {
+	public Album(int albumID, String title, int numberOfSales, int yearOfRelease, Band band) {
 		super();
+		this.albumID = albumID;
 		this.title = title;
 		this.numberOfSales = numberOfSales;
 		this.yearOfRelease = yearOfRelease;
-		this.lengthInMinutes = lengthInMinutes;
-		this.bandName = bandName;
+		this.band = band;
+	}
+
+	public int getAlbumID() {
+		return albumID;
+	}
+
+	public void setAlbumID(int albumID) {
+		this.albumID = albumID;
 	}
 
 	public String getTitle() {
@@ -70,30 +76,20 @@ public class Album {
 		this.yearOfRelease = yearOfRelease;
 	}
 
-	public double getLengthInMinutes() {
-		return lengthInMinutes;
+	public Band getBand() {
+		return band;
 	}
 
-	public void setLengthInMinutes(double lengthInMinutes) {
-		this.lengthInMinutes = lengthInMinutes;
-	}
-
-	public Band getBandName() {
-		return bandName;
-	}
-
-	public void setBandName(Band bandName) {
-		this.bandName = bandName;
+	public void setBand(Band band) {
+		this.band = band;
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((bandName == null) ? 0 : bandName.hashCode());
-		long temp;
-		temp = Double.doubleToLongBits(lengthInMinutes);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + albumID;
+		result = prime * result + ((band == null) ? 0 : band.hashCode());
 		result = prime * result + numberOfSales;
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		result = prime * result + yearOfRelease;
@@ -109,12 +105,12 @@ public class Album {
 		if (getClass() != obj.getClass())
 			return false;
 		Album other = (Album) obj;
-		if (bandName == null) {
-			if (other.bandName != null)
-				return false;
-		} else if (!bandName.equals(other.bandName))
+		if (albumID != other.albumID)
 			return false;
-		if (Double.doubleToLongBits(lengthInMinutes) != Double.doubleToLongBits(other.lengthInMinutes))
+		if (band == null) {
+			if (other.band != null)
+				return false;
+		} else if (!band.equals(other.band))
 			return false;
 		if (numberOfSales != other.numberOfSales)
 			return false;
@@ -130,9 +126,8 @@ public class Album {
 
 	@Override
 	public String toString() {
-		return "Album [title=" + title + ", numberOfSales=" + numberOfSales + ", yearOfRelease=" + yearOfRelease
-				+ ", lengthInMinutes=" + lengthInMinutes + ", bandName=" + bandName + "]";
+		return "Album [albumID=" + albumID + ", title=" + title + ", numberOfSales=" + numberOfSales
+				+ ", yearOfRelease=" + yearOfRelease + ", band=" + band + "]";
 	}
-
 	
 }

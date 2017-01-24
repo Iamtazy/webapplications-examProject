@@ -5,52 +5,58 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
 @Entity
 public class Member {
-
 	
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name="member_ID", nullable = false)
-	private int ID;
+	@NotNull
+	private int memberID;
 	@NotEmpty
 	private String name;
+	@NotEmpty
 	private String gender;
+	@NotEmpty
 	private String instrument;
+	@NotNull
 	private Date birthDate;
+	@NotEmpty
 	private String countryOfBirth;
-	private String cityOfBirth;
 	@ManyToOne
+	@JoinColumn(name = "band_id")
 	private Band band;
 	
 	public Member(){
 		
 	}
 
-	public Member(int iD, String name, String gender, String instrument, Date birthDate, String countryOfBirth,
-			String cityOfBirth, Band band) {
+	public Member(int memberID, String name, String gender, String instrument, Date birthDate, String countryOfBirth,
+			Band band) {
 		super();
-		ID = iD;
+		this.memberID = memberID;
 		this.name = name;
 		this.gender = gender;
 		this.instrument = instrument;
 		this.birthDate = birthDate;
 		this.countryOfBirth = countryOfBirth;
-		this.cityOfBirth = cityOfBirth;
 		this.band = band;
 	}
 
-	public int getID() {
-		return ID;
+	public int getMemberID() {
+		return memberID;
 	}
 
-	public void setID(int iD) {
-		ID = iD;
+	public void setMemberID(int memberID) {
+		this.memberID = memberID;
 	}
 
 	public String getName() {
@@ -93,14 +99,6 @@ public class Member {
 		this.countryOfBirth = countryOfBirth;
 	}
 
-	public String getCityOfBirth() {
-		return cityOfBirth;
-	}
-
-	public void setCityOfBirth(String cityOfBirth) {
-		this.cityOfBirth = cityOfBirth;
-	}
-
 	public Band getBand() {
 		return band;
 	}
@@ -113,13 +111,12 @@ public class Member {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ID;
 		result = prime * result + ((band == null) ? 0 : band.hashCode());
 		result = prime * result + ((birthDate == null) ? 0 : birthDate.hashCode());
-		result = prime * result + ((cityOfBirth == null) ? 0 : cityOfBirth.hashCode());
 		result = prime * result + ((countryOfBirth == null) ? 0 : countryOfBirth.hashCode());
 		result = prime * result + ((gender == null) ? 0 : gender.hashCode());
 		result = prime * result + ((instrument == null) ? 0 : instrument.hashCode());
+		result = prime * result + memberID;
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		return result;
 	}
@@ -133,8 +130,6 @@ public class Member {
 		if (getClass() != obj.getClass())
 			return false;
 		Member other = (Member) obj;
-		if (ID != other.ID)
-			return false;
 		if (band == null) {
 			if (other.band != null)
 				return false;
@@ -144,11 +139,6 @@ public class Member {
 			if (other.birthDate != null)
 				return false;
 		} else if (!birthDate.equals(other.birthDate))
-			return false;
-		if (cityOfBirth == null) {
-			if (other.cityOfBirth != null)
-				return false;
-		} else if (!cityOfBirth.equals(other.cityOfBirth))
 			return false;
 		if (countryOfBirth == null) {
 			if (other.countryOfBirth != null)
@@ -165,6 +155,8 @@ public class Member {
 				return false;
 		} else if (!instrument.equals(other.instrument))
 			return false;
+		if (memberID != other.memberID)
+			return false;
 		if (name == null) {
 			if (other.name != null)
 				return false;
@@ -175,10 +167,8 @@ public class Member {
 
 	@Override
 	public String toString() {
-		return "Member [ID=" + ID + ", name=" + name + ", gender=" + gender + ", instruments=" + instrument
-				+ ", birthDate=" + birthDate + ", countryOfBirth=" + countryOfBirth + ", cityOfBirth=" + cityOfBirth
-				+ ", band=" + band + "]";
+		return "Member [memberID=" + memberID + ", name=" + name + ", gender=" + gender + ", instrument=" + instrument
+				+ ", birthDate=" + birthDate + ", countryOfBirth=" + countryOfBirth + ", band=" + band + "]";
 	}
 
-	
 }
