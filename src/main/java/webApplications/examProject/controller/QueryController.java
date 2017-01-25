@@ -46,7 +46,7 @@ public class QueryController {
 	@RequestMapping("/albums")
 	public String albums(Model model) {
 		List<Album> albumList = albumManager.getAllAlbum();
-		model.addAttribute("members", albumList);
+		model.addAttribute("albums", albumList);
 		return "albums";
 	}
 }

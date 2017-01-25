@@ -115,7 +115,7 @@ public class PersistController {
 	@RequestMapping("/insertBand")
 	public String insertBand(@Valid @ModelAttribute("band") Band band, BindingResult bindigRes) {
 		if (bindigRes.hasErrors())
-			return "redirect:/bandForm";
+			return "bandform";
 		bandManager.saveBand(band);	
 		return "redirect:/bands";
 	}
