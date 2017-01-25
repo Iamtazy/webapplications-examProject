@@ -5,10 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
@@ -31,21 +28,17 @@ public class Album {
 	@NotNull
 	@Min(value = 1975)
 	private int yearOfRelease;
-	@ManyToOne
-	@JoinColumn(name="band_id")
-	private Band band;
 	
 	protected Album() {
 		
 	}
 
-	public Album(int albumID, String title, int numberOfSales, int yearOfRelease, Band band) {
+	public Album(int albumID, String title, int numberOfSales, int yearOfRelease) {
 		super();
 		this.albumID = albumID;
 		this.title = title;
 		this.numberOfSales = numberOfSales;
 		this.yearOfRelease = yearOfRelease;
-		this.band = band;
 	}
 
 	public int getAlbumID() {
@@ -80,20 +73,11 @@ public class Album {
 		this.yearOfRelease = yearOfRelease;
 	}
 
-	public Band getBand() {
-		return band;
-	}
-
-	public void setBand(Band band) {
-		this.band = band;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + albumID;
-		result = prime * result + ((band == null) ? 0 : band.hashCode());
 		result = prime * result + numberOfSales;
 		result = prime * result + ((title == null) ? 0 : title.hashCode());
 		result = prime * result + yearOfRelease;
@@ -111,11 +95,6 @@ public class Album {
 		Album other = (Album) obj;
 		if (albumID != other.albumID)
 			return false;
-		if (band == null) {
-			if (other.band != null)
-				return false;
-		} else if (!band.equals(other.band))
-			return false;
 		if (numberOfSales != other.numberOfSales)
 			return false;
 		if (title == null) {
@@ -131,7 +110,8 @@ public class Album {
 	@Override
 	public String toString() {
 		return "Album [albumID=" + albumID + ", title=" + title + ", numberOfSales=" + numberOfSales
-				+ ", yearOfRelease=" + yearOfRelease + ", band=" + band + "]";
+				+ ", yearOfRelease=" + yearOfRelease + "]";
 	}
+
 	
 }

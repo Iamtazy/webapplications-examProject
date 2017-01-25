@@ -7,8 +7,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotEmpty;
@@ -31,16 +29,12 @@ public class Member {
 	private Date birthDate;
 	@NotEmpty
 	private String countryOfBirth;
-	@ManyToOne
-	@JoinColumn(name = "band_id")
-	private Band band;
 	
 	public Member(){
 		
 	}
 
-	public Member(int memberID, String name, String gender, String instrument, Date birthDate, String countryOfBirth,
-			Band band) {
+	public Member(int memberID, String name, String gender, String instrument, Date birthDate, String countryOfBirth) {
 		super();
 		this.memberID = memberID;
 		this.name = name;
@@ -48,7 +42,6 @@ public class Member {
 		this.instrument = instrument;
 		this.birthDate = birthDate;
 		this.countryOfBirth = countryOfBirth;
-		this.band = band;
 	}
 
 	public int getMemberID() {
@@ -99,19 +92,10 @@ public class Member {
 		this.countryOfBirth = countryOfBirth;
 	}
 
-	public Band getBand() {
-		return band;
-	}
-
-	public void setBand(Band band) {
-		this.band = band;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((band == null) ? 0 : band.hashCode());
 		result = prime * result + ((birthDate == null) ? 0 : birthDate.hashCode());
 		result = prime * result + ((countryOfBirth == null) ? 0 : countryOfBirth.hashCode());
 		result = prime * result + ((gender == null) ? 0 : gender.hashCode());
@@ -130,11 +114,6 @@ public class Member {
 		if (getClass() != obj.getClass())
 			return false;
 		Member other = (Member) obj;
-		if (band == null) {
-			if (other.band != null)
-				return false;
-		} else if (!band.equals(other.band))
-			return false;
 		if (birthDate == null) {
 			if (other.birthDate != null)
 				return false;
@@ -168,7 +147,8 @@ public class Member {
 	@Override
 	public String toString() {
 		return "Member [memberID=" + memberID + ", name=" + name + ", gender=" + gender + ", instrument=" + instrument
-				+ ", birthDate=" + birthDate + ", countryOfBirth=" + countryOfBirth + ", band=" + band + "]";
+				+ ", birthDate=" + birthDate + ", countryOfBirth=" + countryOfBirth + "]";
 	}
 
+	
 }

@@ -14,7 +14,6 @@ Album ID: <input type="number" name="albumID" readonly value="${album.albumID}"/
 Title: <form:input type="text" path="title"/><form:errors path='title'/><br>
 Number of sales: <form:input type="number" path="numberOfSales"/><form:errors path='numberOfSales'/><br>
 Year of release: <form:input type="number" path="yearOfRelease"/><form:errors path='yearOfRelease'/><br>
-Band ID: <form:input type="number" path="band"/><form:errors path='band'/><br>
 <input type="submit" value="OK"/>
 </form:form>
 </body>

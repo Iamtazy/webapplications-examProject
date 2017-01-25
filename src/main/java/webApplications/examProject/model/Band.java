@@ -4,7 +4,6 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -27,9 +26,9 @@ public class Band {
 	private String genre;
 	@NotEmpty
 	private String countryOfOrigin;
-	@OneToMany(mappedBy="band")
+	@OneToMany
 	private List<Album> albums;
-	@OneToMany(mappedBy="band")
+	@OneToMany
 	private List<Member> members;
 	
 	protected Band() {

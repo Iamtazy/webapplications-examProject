@@ -16,7 +16,6 @@ Gender: <form:input type="text" path="gender"/><form:errors path='gender'/><br>
 Instrument: <form:input type="text" path="instrument"/><form:errors path='instrument'/><br>
 Birthdate: <form:input type="date" path="birthDate"/><form:errors path='birthDate'/><br>
 Country of birth: <form:input type="text" path="countryOfBirth"/><form:errors path='countryOfBirth'/><br>
-Band ID: <form:input type="number" path="band"/><form:errors path='band'/><br>
 <input type="submit" value="OK"/>
 </form:form>
 </body>

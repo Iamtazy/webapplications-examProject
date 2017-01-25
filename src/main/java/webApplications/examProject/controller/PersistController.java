@@ -34,14 +34,12 @@ public class PersistController {
 			album.setTitle("");
 			album.setNumberOfSales(0);
 			album.setYearOfRelease(0);
-			album.setBand(null);
 		} else {
 			Album tempAlbum = albumManager.getAlbumById(id);
 			album.setAlbumID(tempAlbum.getAlbumID());
 			album.setTitle(tempAlbum.getTitle());
 			album.setNumberOfSales(tempAlbum.getNumberOfSales());
 			album.setYearOfRelease(tempAlbum.getYearOfRelease());
-			album.setBand(tempAlbum.getBand());
 
 		}
 		return "albumform";
@@ -64,7 +62,6 @@ public class PersistController {
 			member.setInstrument("");
 			member.setBirthDate(null);
 			member.setCountryOfBirth("");
-			member.setBand(null);
 			
 		} else {
 			Member tempMember = memberManager.getMemberById(id);
@@ -74,7 +71,6 @@ public class PersistController {
 			member.setInstrument(tempMember.getInstrument());
 			member.setBirthDate(tempMember.getBirthDate());
 			member.setCountryOfBirth(tempMember.getCountryOfBirth());
-			member.setBand(tempMember.getBand());
 		}
 		return "memberform";
 	}
