@@ -146,8 +146,7 @@ public class Member {
 
 	@Override
 	public String toString() {
-		return "Member [memberID=" + memberID + ", name=" + name + ", gender=" + gender + ", instrument=" + instrument
-				+ ", birthDate=" + birthDate + ", countryOfBirth=" + countryOfBirth + "]";
+		return memberID + ",   " + name;
 	}
 
 	

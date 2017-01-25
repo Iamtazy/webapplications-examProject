@@ -16,6 +16,7 @@
 		<td><a href="memberForm?id=${member.memberID}">Modify</a>, <a href="memberRemove?id=${member.memberID}">Delete</a></tr>
 </c:forEach>
 </table>
+<p>${error}</p>
 <h4><a href="index">Back</a></h4><br>
 </body>
 </html>
