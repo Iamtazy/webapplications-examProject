@@ -16,6 +16,6 @@
 		<td><a href="albumForm?id=${album.albumID}">Modify</a>, <a href="albumRemove?id=${album.albumID}">Delete</a></tr>
 </c:forEach>
 </table>
-<h4><a href="mainPage">Back</a></h4><br>
+<h4><a href="index">Back</a></h4><br>
 </body>
 </html>

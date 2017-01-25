@@ -65,7 +65,6 @@ public class PersistController {
 			member.setBirthDate(null);
 			member.setCountryOfBirth("");
 			member.setBand(null);
-			model.addAttribute("bandList", bandManager.getAllBand());
 			
 		} else {
 			Member tempMember = memberManager.getMemberById(id);
@@ -76,7 +75,6 @@ public class PersistController {
 			member.setBirthDate(tempMember.getBirthDate());
 			member.setCountryOfBirth(tempMember.getCountryOfBirth());
 			member.setBand(tempMember.getBand());
-			model.addAttribute("bandList", bandManager.getAllBand());
 		}
 		return "memberform";
 	}
@@ -90,7 +88,7 @@ public class PersistController {
 	}
 	
 	@RequestMapping("/bandForm")
-	public String bandForm(@RequestParam(required=false) Integer id, @ModelAttribute("band") Band band) {
+	public String bandForm(@RequestParam(required=false) Integer id, @ModelAttribute("band") Band band, Model model) {
 		if (id == null) {
 			band.setBandID(0);
 			band.setName("");
@@ -98,6 +96,8 @@ public class PersistController {
 			band.setCountryOfOrigin("");
 			band.setAlbums(null);
 			band.setMembers(null);
+			model.addAttribute("members", memberManager.getAllMember());
+			model.addAttribute("albums", albumManager.getAllAlbum());
 		} else {
 			Band tempBand = bandManager.getBandById(id);
 			band.setBandID(tempBand.getBandID());
@@ -106,7 +106,8 @@ public class PersistController {
 			band.setCountryOfOrigin(tempBand.getCountryOfOrigin());
 			band.setAlbums(tempBand.getAlbums());
 			band.setMembers(tempBand.getMembers());
-
+			model.addAttribute("members", memberManager.getAllMember());
+			model.addAttribute("albums", albumManager.getAllAlbum());
 		}
 		return "bandform";
 	}
@@ -114,7 +115,7 @@ public class PersistController {
 	@RequestMapping("/insertBand")
 	public String insertBand(@Valid @ModelAttribute("band") Band band, BindingResult bindigRes) {
 		if (bindigRes.hasErrors())
-			return "bandform";
+			return "redirect:/bandForm";
 		bandManager.saveBand(band);	
 		return "redirect:/bands";
 	}

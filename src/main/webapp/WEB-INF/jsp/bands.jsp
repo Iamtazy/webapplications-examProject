@@ -16,6 +16,6 @@
 		<td><a href="bandForm?id=${band.bandID}">Modify</a>, <a href="bandRemove?id=${band.bandID}">Delete</a></tr>
 </c:forEach>
 </table>
-<h4><a href="mainPage">Back</a></h4><br>
+<h4><a href="index">Back</a></h4><br>
 </body>
 </html>
