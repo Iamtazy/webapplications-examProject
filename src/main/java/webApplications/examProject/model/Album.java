@@ -23,6 +23,7 @@ public class Album {
 	@NotEmpty
 	private String title;
 	@NotNull
+	@Min(value = 1)
 	private int numberOfSales;
 	@NotNull
 	@Min(value = 1975)

@@ -8,9 +8,14 @@
 <title>Bands</title>
 </head>
 <body>
+<h2><a href="bandForm">Add a new band</a></h2><br>
+<table border=1 width=100%>
+	<tr><th>Band ID</th><th>Name</th><th>Genre</th><th>Country of origin</th><th>Members of band</th><th>Albums of band</th><th>Functions</th></tr>
 <c:forEach var="band" items="${bands}">
-	<p>${band}<br></p>
+		<tr><td>${band.bandID}</td><td>${band.genre}</td><td>${band.countryOfOrigin}</td><td>${band.members}</td><td>${band.albums}</td>
+		<td><a href="bandForm?id=${band.bandID}">Modify</a>, <a href="bandRemove?id=${band.bandID}">Delete</a></tr>
 </c:forEach>
-asdasd
+</table>
+<h4><a href="mainPage">Back</a></h4><br>
 </body>
 </html>

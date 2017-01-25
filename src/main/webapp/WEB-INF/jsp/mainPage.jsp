@@ -4,13 +4,12 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Webalk - Index</title>
+<title>Webes alkalmazások - JAVA</title>
 </head>
 <body>
-<h2>Webalk Index</h2>
-<h4><a href="/bands">Bands</a></h4>
-<h4><a href="/members">Members</a></h4>
-<h4><a href="/albums">Albums</a></h4>
-<h4><a href="/publishers">Publishers</a></h4>
+<h1>Szabó Alex - AS97C7 - Webes alkalmazások</h1>
+<h3><a href="/bands">Bands</a></h3>
+<h3><a href="/albums">Albums</a></h3>
+<h3><a href="/members">Members</a></h3>
 </body>
 </html>
